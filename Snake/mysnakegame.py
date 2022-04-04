@@ -6,8 +6,8 @@ from PIL import Image, ImageTk
 
 movement = 10
 speed = 200
-scol='./color/black.png'
-fcol='./color/black.png'
+scol='./Snake/color/black.png'
+fcol='./Snake/color/black.png'
 
 #Gamemain
 class Snake(Canvas):
@@ -66,9 +66,24 @@ class Snake(Canvas):
             )
     def finish_game(self):
         self.delete(ALL)
-        tryagain = Button(self,height=1,width=10, text="Try Again",command=playgame).place(anchor='c',x=300,y=200)
-        Scoreinform = Label(self,text = 'Your score is '+str(self.score),foreground="red",background='#d2d2e0').place(anchor='c',x=300,y=170)
-        main=Button(self,height=1,width=10,text='Main menu',command=mainmenu).place(anchor='c',x=300,y=230)
+        tryagain = Button(
+            self,
+            height=1,
+            width=10,
+            text="Try Again",command=playgame)
+        tryagain.place(anchor='c',x=300,y=200)
+        Scoreinform = Label(
+            self,
+            text = 'Your score is '+str(self.score),
+            foreground="red",background='#d2d2e0')
+        Scoreinform.place(anchor='c',x=300,y=170)
+        main=Button(
+            self,
+            height=1,
+            width=10,
+            text='Main menu',
+            command=mainmenu)
+        main.place(anchor='c',x=300,y=230)
         
     def consume_food(self):
         global speed
@@ -108,7 +123,9 @@ class Snake(Canvas):
             new_head = (head_x, head_y - movement)
 
         self.snake_pos = [new_head] + self.snake_pos[:-1]
-        for segment, position in zip(self.find_withtag('snake'), self.snake_pos):
+        for segment, position in zip(
+            self.find_withtag('snake'),
+            self.snake_pos):
             self.coords(segment, position)
     def on_key_press(self, e):
         
